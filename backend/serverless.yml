@@ -3,6 +3,7 @@ org: hamzat
 app: todo-app-serverless
 service: todo-app-serverless
 
+
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
@@ -62,7 +63,23 @@ custom:
               type: string
             done:
               type: boolean
-          
+
+iam:
+  role:
+    statements:
+      - Effect: Allow
+        Action:
+          - xray:GetServiceGraph
+          - xray:GetTraceGraph
+          - xray:GetTraceSummaries
+          - xray:GetSamplingRules
+          - xray:GetSamplingTargets
+          - xray:GetSamplingStatisticSummaries
+          - xray:BatchGetTraces
+          - xray:GetGroups
+          - xray:GetGroup
+          - xray:PutTraceSegments
+        Resource: "*"          
 
 functions:
 
